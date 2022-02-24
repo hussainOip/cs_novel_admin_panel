@@ -1,0 +1,62 @@
+@import 'assets/vendor/bootstrap/css/bootstrap.min.css';
+@import 'assets/vendor/font-awesome/css/font-awesome.min.css';
+@import 'assets/vendor/animate-css/vivify.min.css';
+@import 'assets/vendor/c3/c3.min.css';
+@import 'assets/vendor/jvectormap/jquery-jvectormap-2.0.3.css';
+@import 'assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css';
+@import 'assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css';
+@import 'assets/vendor/bootstrap-colorpicker/css/bootstrap-colorpicker.css';
+@import 'assets/vendor/multi-select/css/multi-select.css';
+@import 'assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css';
+@import 'assets/vendor/nouislider/nouislider.min.css';
+@import 'assets/vendor/nestable/jquery-nestable.css';
+@import 'assets/css/site.min.css';
+@import 'assets/css/custom.css';
+
+
+tr td img {
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+
+.switch-toggle label {
+    width: 50px;
+    height: 25px;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+}
+
+.switch-toggle.true label {
+    background: #918383;
+    border: 1px solid #918383;
+}
+
+.switch-toggle.false label {
+    background: #fff;
+    border: 1px solid #918383;
+}
+
+.switch-toggle label:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    transition: .3s ease-in-out;
+}
+
+.switch-toggle.true label:after {
+    background-color: #fff;
+    transform: translate(25px, -46%);
+}
+
+.switch-toggle.false label:after {
+    background-color: #918383;
+    transform: translate(5px, -46%);
+}
