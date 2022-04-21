@@ -6,7 +6,7 @@ import {
   toggleSearchBar,
   toggleNotificationBar,
   setOffcanvas,
-} from "../../actions/settingsAction";
+} from "../../redux/actions/settingsAction";
 
 const Header = ({
   toggleMegamenu,
@@ -49,7 +49,7 @@ const Header = ({
       <nav className="navbar top-navbar">
         <div className="container-fluid">
           <div className="navbar-left">
-            <div className="navbar-btn">
+            <div className="navbar-btn d-none">
               <Link to="/">
                 <img
                   src="../assets/images/icon.svg"
@@ -65,7 +65,7 @@ const Header = ({
                 <i className="lnr lnr-menu fa fa-bars"></i>
               </button>
             </div>
-            <ul className="nav navbar-nav">
+            <ul className="nav navbar-nav d-none">
               <li className="dropdown">
                 {/* <span className="dropdown-toggle icon-menu" data-toggle="dropdown">
                                     <i className="icon-envelope"></i>
@@ -192,7 +192,7 @@ const Header = ({
             </ul>
           </div>
 
-          <div className="navbar-right">
+          <div className="navbar-right ">
             <div id="navbar-menu">
               <ul className="nav navbar-nav">
                 {/* <li><span onClick={() => toggleSearchBar(true)} className="search_toggle icon-menu" title="Search Result"><i className="icon-magnifier"></i></span></li>
@@ -218,9 +218,23 @@ const Header = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  isMegaMenu: state.settings.isMegaMenu,
-  offcanvas: state.settings.offcanvas,
+const mapStateToProps = ({reducer,
+  themeColor,
+  fontStyle,
+  lightVersion,
+  RtlVersion,
+  offcanvas,
+  horizontalMenu,
+  miniSidebar,
+  miniHover,}) => ({
+    themeColor: themeColor,
+    fontStyle: fontStyle,
+    lightVersion: lightVersion,
+    RtlVersion: RtlVersion,
+    offcanvas: offcanvas,
+    horizontalMenu: horizontalMenu,
+    miniSidebar: miniSidebar,
+    miniHover: miniHover,
 });
 
 const mapDispatchToProps = (dispatch) => ({

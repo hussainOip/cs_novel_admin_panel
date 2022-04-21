@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import MetisMenu from 'react-metismenu';
 import { Link } from 'react-router-dom';
 
-import { setOffcanvas } from '../../actions/settingsAction';
+import { setOffcanvas } from '../../redux/actions/settingsAction';
 import metisMenu from './metisMenu';
 import DefaultLink from './DefaultLink';
 import { Dropdown } from 'react-bootstrap';
-import { setMiniSidebarMenuOn, setMiniHover } from '../../actions/settingsAction';
+import { setMiniSidebarMenuOn, setMiniHover } from '../../redux/actions/settingsAction';
+import logo  from '../../assets/images/csnovels-logo.png';
 
 
 class Menu extends Component {
@@ -73,7 +74,9 @@ class Menu extends Component {
 			<>
 				<div id="left-sidebar" className={`sidebar${this.props.miniSideMenuOn ? ' mini_sidebar_on' : ''}`}>
 					<div className="navbar-brand">
-						<Link to="/"><img src="../assets/images/icon.svg" alt="Oculux Logo" className="img-fluid logo" /><span>Oculux</span></Link>
+						<Link to="/">
+							<img src={logo} alt="" className="img-fluid logo" />
+						</Link>
 						<button type="button" className="btn-toggle-offcanvas btn btn-sm float-right" onClick={() => this.props.setOffcanvas(!this.props.offcanvas)}><i className="lnr lnr-menu icon-close"></i></button>
 					</div>
 					<div className="sidebar-scroll">

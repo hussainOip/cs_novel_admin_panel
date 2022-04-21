@@ -1,62 +1,209 @@
-@import 'assets/vendor/bootstrap/css/bootstrap.min.css';
-@import 'assets/vendor/font-awesome/css/font-awesome.min.css';
-@import 'assets/vendor/animate-css/vivify.min.css';
-@import 'assets/vendor/c3/c3.min.css';
-@import 'assets/vendor/jvectormap/jquery-jvectormap-2.0.3.css';
-@import 'assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css';
-@import 'assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css';
-@import 'assets/vendor/bootstrap-colorpicker/css/bootstrap-colorpicker.css';
-@import 'assets/vendor/multi-select/css/multi-select.css';
-@import 'assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css';
-@import 'assets/vendor/nouislider/nouislider.min.css';
-@import 'assets/vendor/nestable/jquery-nestable.css';
-@import 'assets/css/site.min.css';
-@import 'assets/css/custom.css';
+@import "assets/vendor/bootstrap/css/bootstrap.min.css";
+@import "assets/vendor/font-awesome/css/font-awesome.min.css";
+@import "assets/vendor/animate-css/vivify.min.css";
+@import "assets/vendor/c3/c3.min.css";
+@import "assets/vendor/jvectormap/jquery-jvectormap-2.0.3.css";
+@import "assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css";
+@import "assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css";
+@import "assets/vendor/bootstrap-colorpicker/css/bootstrap-colorpicker.css";
+@import "assets/vendor/multi-select/css/multi-select.css";
+@import "assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css";
+@import "assets/vendor/nouislider/nouislider.min.css";
+@import "assets/vendor/nestable/jquery-nestable.css";
+@import "assets/css/site.min.css";
+@import "assets/css/custom.css";
 
+.theme-cyan #left-sidebar a:hover i, #left-sidebar a:focus i {
+    background: #ffc240 !important;
+    color: #212529 !important;
+}
+.theme-cyan #left-sidebar a:hover, #left-sidebar a:focus {
+    background: #ffc240 !important;
+    color: #212529 !important;
+}
 
 tr td img {
-    height: 70px;
-    width: 70px;
-    object-fit: cover;
-    border-radius: 100%;
-    overflow: hidden;
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  border-radius: 100%;
+  overflow: hidden;
 }
 
+.category-action-td {
+  max-width: 250px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+
+.custom_table table tbody tr td {
+    background: transparent !important;
+    font-size: 16px;
+    color: #444;
+}
+
+.custom_table table tr td, .custom_table table tr th {
+    padding: 10px 30px;
+}
+
+.custom_table table thead tr th {
+    border-bottom: 1px solid #212529 !important;
+    color: #212529;
+    font-size: 16px;
+    font-weight: 700;
+    background: transparent !important;
+}
+
+.custom-btn {
+  background: #c3c3c3;
+  color: #555;
+  font-weight: bold;
+}
+.desc{
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modal{
+    background: #000000b0 !important;
+}
+/* switch toggle csss */
+
+.switch-toggle {
+  position: relative;
+  line-height: 1;
+}
+
+.switch-toggle input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 1;
+  cursor: pointer;
+}
 
 .switch-toggle label {
-    width: 50px;
-    height: 25px;
-    border-radius: 30px;
-    position: relative;
-    cursor: pointer;
-}
-
-.switch-toggle.true label {
-    background: #918383;
-    border: 1px solid #918383;
-}
-
-.switch-toggle.false label {
-    background: #fff;
-    border: 1px solid #918383;
+  width: 50px;
+  height: 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  background: green;
+  border: 1px solid green;
+  margin: 0;
 }
 
 .switch-toggle label:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    height: 20px;
-    width: 20px;
-    border-radius: 100%;
-    transition: .3s ease-in-out;
+  content: "";
+  position: absolute;
+  top: 47%;
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  transition: 0.3s ease-in-out;
+  background-color: #fff;
+  transform: translate(25px, -50%);
 }
 
-.switch-toggle.true label:after {
-    background-color: #fff;
-    transform: translate(25px, -46%);
+.switch-toggle input.false + label {
+  background: #fff;
+  border: 1px solid maroon;
 }
 
-.switch-toggle.false label:after {
-    background-color: #918383;
-    transform: translate(5px, -46%);
+.switch-toggle input.false + label:after{
+  transform: translate(5px, -50%);
+  background: maroon;
 }
+
+.switch-toggle.false label {
+  background: #fff;
+  border: 1px solid maroon;
+}
+
+.switch-toggle.false label:after{
+  transform: translate(5px, -50%);
+  background: maroon;
+}
+
+
+.modal-body input {
+  width: 100%;
+  border: 1px solid #e1e8ed;
+  border-radius: 5px;
+  height: 40px;
+  outline: 0;
+  padding: 0 10px;
+}
+.uploadImage{
+  width: 170px;
+  height: 200px;
+  display: flex;
+}
+.afterUpload{
+  display: flex;
+  flex-direction: column;
+}
+.afterUpload button{
+  width: 170px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center ;
+}
+.main :placeholder-shown{
+  text-align: center;
+}
+.main input{
+  width: 500px;
+  height: 30px;
+  text-align: center;
+}
+.submit_btn{
+  margin-top: 10px;
+}
+
+.pagination_section {
+  position: absolute;
+  top: 850px;
+  right: 40%;
+}
+.list-group {
+  padding: 0;
+  margin: 0;
+  width: 60%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0;
+  margin-bottom: 0;
+  text-align: center;
+}
+.seasons_list{
+  color: #111; font-family: 'Helvetica Neue', sans-serif;  font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;
+}
+.chapter_heading h1{
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+

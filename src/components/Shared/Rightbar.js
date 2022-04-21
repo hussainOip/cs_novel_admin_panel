@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { toggleNotificationBar } from '../../actions/settingsAction';
+import { toggleNotificationBar } from '../../redux/actions/settingsAction';
 
 const Rightbar = ({ isNotificationbar, toggleNotificationBar }) => {
     return (

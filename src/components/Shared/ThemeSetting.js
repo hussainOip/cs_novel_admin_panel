@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { setThemeColor, setFontStyle, setLightTheme, setRtlVersion, setHorizontalMenu, setMiniSidebar, setMiniSidebarMenuOn } from '../../actions/settingsAction';
+import { setThemeColor, setFontStyle, setLightTheme, setRtlVersion, setHorizontalMenu, setMiniSidebar, setMiniSidebarMenuOn } from '../../redux/actions/settingsAction';
 
 const ThemeSetting = ({
     setThemeColor,

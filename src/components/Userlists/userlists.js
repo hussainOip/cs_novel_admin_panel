@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect} from "react";
 import { connect } from "react-redux";
-import * as actions from "../../actions/userAction";
+import * as actions from "../../redux/actions/userAction";
 import userDP from "../../assets/images/user-icon.png";
 
 const Userlists = ({ get_userlists, blockUnblockUser, userReducer }) => {
@@ -12,7 +12,7 @@ const Userlists = ({ get_userlists, blockUnblockUser, userReducer }) => {
     <>
       <div className="col-lg-12">
         <div className="card">
-            <h2 className="user_heading my-4">Users</h2>
+            <h2 className="user_heading my-4">User</h2>
           <div className="body">
             <div className="table-responsive">
               <table className="table">
@@ -22,6 +22,7 @@ const Userlists = ({ get_userlists, blockUnblockUser, userReducer }) => {
                     <th>User ID</th>
                     <th>User Name</th>
                     <th>User Email</th>
+                    <th>Unblocked / Blocked</th>
                   </tr>
                 </thead>
                 <tbody>

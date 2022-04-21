@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { toggleMegamenu } from '../../actions/settingsAction';
+import { toggleMegamenu } from '../../redux/actions/settingsAction';
 
 const Megamenu = ({ toggleMegamenu, isMegaMenu }) => {
     return (

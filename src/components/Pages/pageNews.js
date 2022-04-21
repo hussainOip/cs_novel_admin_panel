@@ -206,6 +206,5 @@ const PageNews = () => {
             </div>
         </div>
     );
-
 }
 export default PageNews

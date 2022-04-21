@@ -24,6 +24,7 @@ import FormDragdropupload from "./Form/formDragdropupload";
 import FormsEditors from "./Form/formsEditors";
 import FormSummernote from "./Form/formSummernote";
 import FormValidation from "./Form/formValidation";
+// import Chapter from "./Chapter/Chapter"
 import FormWizard from "./Form/formWizard";
 import ListView from "./Contacts/ListView";
 import GridView from "./Contacts/GridView";
@@ -82,6 +83,15 @@ import Nestable from "./Components/Nestable";
 // userlists
 
 import userlists from "./Userlists/userlists";
+import Category from "./Category/category";
+import BookForm from "./Book/BookForm";
+import Chapter from "./Chapter/Chapter";
+import ChapterDescription from "./Chapter/ChapterDescription";
+import BookPreview from "./Pages/bookPreview";
+import Order from "./Order/Order";
+ 
+
+
 
 const Routes = [
   {
@@ -191,11 +201,44 @@ const Routes = [
   },
   {
       path: "/userlists",
-      name: 'dashboard12',
+      name: 'Userlists',
       exact: true,
       pageTitle: "Userlists",
       component: userlists
   },
+  {
+      path: "/categories",
+      name: 'Categories',
+      exact: true,
+      pageTitle: "Categories",
+      component: Category
+  },
+  {
+      path: "/bookform",
+      name: 'Book Form',
+      exact: true,
+      pageTitle: "Book Form",
+      component: BookForm
+  },{
+    path: "/chapter/:seasonId/bookId/:bookId",
+    name: 'Chapter',
+    exact: true,
+    pageTitle: "Chapter",
+    component: Chapter
+},{
+  path: "/chapterdescription/:id",
+  name: 'Chapter Description',
+  exact: true,
+  pageTitle: "Chapter Description",
+  component: ChapterDescription
+}
+,{
+  path: "/order",
+  name: 'Order',
+  exact: true,
+  pageTitle: "Order",
+  component: Order
+},
   {
     path: "/task-board",
     name: "Taskboard",
@@ -307,6 +350,13 @@ const Routes = [
     exact: true,
     pageTitle: "Page Blog Post",
     component: PageBlogPost,
+  },
+  {
+    path: "/seasonlist/:id",
+    name: "Book Preview",
+    exact: true,
+    pageTitle: "Book Preview",
+    component: BookPreview ,
   },
   {
     path: "/page-blog",

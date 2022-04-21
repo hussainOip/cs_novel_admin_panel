@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { toggleSearchBar } from '../../actions/settingsAction';
+import { toggleSearchBar } from '../../redux/actions/settingsAction';
 
 const Searchbar = ({ isSearchbar, toggleSearchBar }) => {
     return (
