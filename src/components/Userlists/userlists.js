@@ -2,11 +2,26 @@ import React, { useEffect} from "react";
 import { connect } from "react-redux";
 import * as actions from "../../redux/actions/userAction";
 import userDP from "../../assets/images/user-icon.png";
-
+import Pagination from '@material-ui/lab/Pagination';
+import ReactPaginate from "react-paginate";
+  
 const Userlists = ({ get_userlists, blockUnblockUser, userReducer }) => {
+  const pageCount = parseInt(userReducer.userCount / 25) + 1;
+  const [page, setpage] = useState(1);
+  const token = userReducer.accessToken;
   useEffect(() => {
-    get_userlists();
+    get_userlists(token,1)    
+
   }, []);
+  useEffect(()=>{
+   
+    get_userlists(token,page);
+  },[page])
+  const handlePageClick = (e) => {
+    const selectedPage = e.selected;
+    setpage(selectedPage + 1);
+  };
+
 
   return (
     <>
@@ -26,7 +41,7 @@ const Userlists = ({ get_userlists, blockUnblockUser, userReducer }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {userReducer.user.map((item, index) => {
+                  {userReducer?.userlist?.map((item, index) => {
                     // console.log(item, '=====map=====')
                     return (
                       <tr key={index}>
@@ -39,7 +54,7 @@ const Userlists = ({ get_userlists, blockUnblockUser, userReducer }) => {
                             }
                           />
                         </td>
-                        <td>{item?._id}</td>
+                        <td>{item?._id.slice(item._id.length - 5)}</td>
                         <td>{item?.username}</td>
                         <td>{item?.email}</td>
                         <td>
@@ -62,7 +77,33 @@ const Userlists = ({ get_userlists, blockUnblockUser, userReducer }) => {
                     );
                   })}
                 </tbody>
+                <tfoot>
+                <ReactPaginate
+            previousLabel={"prev"}
+            nextLabel={"next"}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+          />
+                </tfoot>
               </table>
+
+              <Items currentItems={currentItems} />
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+      />
             </div>
           </div>
         </div>

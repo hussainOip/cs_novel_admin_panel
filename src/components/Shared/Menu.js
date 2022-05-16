@@ -17,6 +17,7 @@ class Menu extends Component {
 		this.toggleSubMenu = this.toggleSubMenu.bind(this);
 		this.minisidebarMouseOver = this.minisidebarMouseOver.bind(this);
 		this.minisidebarMouseOut = this.minisidebarMouseOut.bind(this);
+		this.userReducer = this.props.userReducer
 	}
 	toggleSubMenu1(e) {
 		console.log(e, 'eeeee')
@@ -55,6 +56,8 @@ class Menu extends Component {
 	}
 
 	componentDidMount() {
+	
+		
 		const getLitext = document.querySelectorAll('li');
 		getLitext.forEach(function(el) {
 			if (el.innerText === 'Main' || el.innerText === "App" || el.innerText === "UI Elements" || el.innerText === "Extra") {
@@ -89,13 +92,13 @@ class Menu extends Component {
 								<br />
 								<Dropdown className="ml-0">
 									<Dropdown.Toggle variant="success" id="dropdown-basic" className="user-name left_dropdown_btn">
-										<strong>Louis Pierce</strong>
+										<strong>{this.props.userReducer?.userData?.username}</strong>
 									</Dropdown.Toggle>
 
 									<Dropdown.Menu>
 										<Link className="dropdown-item" to="/page-profile"><i className="icon-user"></i>My Profile</Link>
-										<Link className="dropdown-item" to="/app-inbox"><i className="icon-envelope-open"></i>Messages</Link>
-										<Link className="dropdown-item" to="/"><i className="icon-settings"></i>Settings</Link>
+										{/* <Link className="dropdown-item" to="/app-inbox"><i className="icon-envelope-open"></i>Messages</Link>
+										<Link className="dropdown-item" to="/"><i className="icon-settings"></i>Settings</Link> */}
 										<li className="divider" />
 										<Link className="dropdown-item" to="/login"><i className="icon-power"></i>Logout</Link>
 									</Dropdown.Menu>
@@ -129,11 +132,16 @@ const mapStateToProps = state => ({
 	miniSidebar: state.settings.miniSidebar,
 	miniSideMenuOn: state.settings.miniSideMenuOn,
 	miniHover: state.settings.miniHover,
+	userReducer:state.userReducer
 })
+
+// const mapStateToProp= ({  userReducer }) => {
+//     return { userReducer };
+//   };
 
 const mapDispatchToProps = dispatch => ({
 	setOffcanvas: (e) => dispatch(setOffcanvas(e)),
 	setMiniSidebarMenuOn: (e) => dispatch(setMiniSidebarMenuOn(e)),
 	setMiniHover: (e) => dispatch(setMiniHover(e)),
 })
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default connect(mapStateToProps, mapDispatchToProps )(Menu);

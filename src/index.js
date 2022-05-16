@@ -5,12 +5,16 @@ import configureStore from "./store";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import { store } from "./redux/reducers/rootReducer";
 // import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-  <Provider store={configureStore()}>
-    <App />
-  </Provider>,
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+
   document.getElementById("root")
 );
 // registerServiceWorker();

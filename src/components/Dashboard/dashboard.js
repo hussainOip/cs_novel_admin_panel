@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Columnchart from "../common/columnchart";
 import Tooltip from "../common/toolTip";
+import * as actions from "../../redux/actions/userAction";
+import { getOrderList } from "../../redux/actions/bookActions";
+import { connect } from "react-redux";
+          
 
-const Dashboard = () => {
+
+const Dashboard = ({userReducer,orderReducer,get_userlists}) => {
+  useEffect(()=>{
+    get_userlists(userReducer?.accessToken,"1")    
+    getOrderList(userReducer?.accessToken,"1");
+  },[])
   let cards = [
     {
       title: "Total Users",
-      quantity: 100,
+      quantity: userReducer.userCount,
       icon: "fa fa-users",
       iconBgCLr: "bg-indigo",
     },
     {
       title: "Total Reports",
-      quantity: 100,
+      quantity: orderReducer.orderCount,
       icon: "fa fa-users",
       iconBgCLr: "bg-indigo",
     },
@@ -687,4 +696,15 @@ const Dashboard = () => {
     </div>
   );
 };
-export default Dashboard;
+
+
+
+function mapStateToProps({ userReducer,orderReducer }) {
+  return {
+    userReducer,orderReducer
+  };
+}
+
+export default connect(mapStateToProps, actions)(Dashboard);
+
+

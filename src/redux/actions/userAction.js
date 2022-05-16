@@ -7,7 +7,7 @@ import userReducer from "../reducers/userReducer";
 export const userLogin = (data, onSuccess) => async (dispatch) => {
   try {
     const response = await axios.post(
-      `http://192.168.0.38:8002/api/users/login`,
+      `${base_url}/users/login`,
       data
     );
     // console.log(response.data);
@@ -30,11 +30,34 @@ export const userLogin = (data, onSuccess) => async (dispatch) => {
     });
   }
 };
+export const getAllusers=async (token)=> {
+  try{
+    console.log(token);
+    const header = {
+      headers: {
+        Authorization: "Bearer " + token,
+        Accept: "application/json",
+      },
+    };
+    const response = await axios.get(
+      `${base_url}/admin/users/gets`, header
+    );
+    console.log(response);
+    // dispatch({
+    //   type: "SET_USERLIST",
+    //   payload: response.data.data,
+    // }); 
+  } catch (error) {
+    toast.error("Something went wrong!", {
+      autoClose: 1000,
+    });
+  }
+}
 
 export const userData = (keyword) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://192.168.0.38:8000/api/book/searchBooks?searchValue=&userId=61d3f78c3b18fcf1a8088566`
+      `${base_url}/book/searchBooks?searchValue=&userId=61d3f78c3b18fcf1a8088566`
     );
     dispatch({
       type: "GET_USER",
@@ -48,13 +71,22 @@ export const userData = (keyword) => async (dispatch) => {
   }
 };
 
-export const get_userlists = () => async (dispatch) => {
+export const get_userlists = (token,page) => async (dispatch) => {
   try {
-    const response = await axios.get(`${base_url}/admin/users/gets`);
+    
+    const header = {
+      headers: {
+        Authorization: "Bearer " + token,
+        Accept: "application/json",
+      },
+    };
+    
+    const response = await axios.get(`${base_url}/admin/users/gets?page=${page}`,header);
+    
     if (response.data.success) {
       dispatch({
         type: "GET_USERLISTS",
-        payload: response.data.data,
+        payload: response.data,
       });
     } else {
       toast.warn("Wow so easy!", {
@@ -84,3 +116,27 @@ export const blockUnblockUser = (user_id) => async () => {
     toast.error("Something went wrong!");
   }
 };
+export const changePassword = async(token,oldPassword,newPassword,confirmPassword)=>{
+try{
+  const header = {
+    headers: {
+      Authorization: "Bearer " + token,
+      Accept: "application/json",
+    },
+  };
+  const data ={oldPassword,newPassword,confirmPassword}
+  const response = await axios.put(
+    `${base_url}/users/changePassword`,data,header
+  );
+  if (response.data.success) {
+    toast.info(response.data.msg, {
+      autoClose: 1000,
+    });
+  } else {
+    toast.warn("Wow so easy!");
+  }
+}catch (error) {
+  toast.error("Something went wrong!");
+}
+
+}

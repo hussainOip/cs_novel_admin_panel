@@ -1,5 +1,5 @@
 const api_state = {
-  user: [],
+  season: [],
 };
 
 const seasonReducer = (state = api_state, action) => {
@@ -7,24 +7,26 @@ const seasonReducer = (state = api_state, action) => {
   switch (action.type) {
     case "GET_SEASONS":
       return {
-        user: [...action.payload],
+        ...state,
+
+        season: [...action.payload],
       };
     case "UPDATE_SEASON":
-      let arr = [...state.user];
+      let arr = [...state.season];
       return {
         ...state,
-        user: arr,
+        season: arr,
       };
     case "DELETE_SEASON":
       const indexx = arr.findIndex(
         (season) => season._id === action.payload.id
       );
       arr[indexx] = { ...action.payload };
-      let array = [...state.user];
+      let array = [...state.season];
       console.log(array);
       return {
         ...state,
-        user: arr,
+        season: arr,
       };
     default:
       return state;

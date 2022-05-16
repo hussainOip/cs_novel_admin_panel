@@ -1,5 +1,5 @@
 const api_state = {
-  user: [],
+  book: [],
 };
 
 const formBookReducer = (state = api_state, action) => {
@@ -7,7 +7,9 @@ const formBookReducer = (state = api_state, action) => {
   switch (action.type) {
     case "GET_BOOK":
       return {
-        user: [...action.payload],
+        ...state,
+
+        book: [...action.payload],
       };
       // case "GET_SEASONS":
       //   return{
@@ -19,23 +21,23 @@ const formBookReducer = (state = api_state, action) => {
       };
     case "UPDATE_BOOK":
       // console.log(action.payload)
-      let arr = [...state.user];
+      let arr = [...state.book];
 
       const index = arr.findIndex((book) => book._id === action.payload.id);
       // arr[index] = { ...action.payload }
       // console.log(index)
       return {
         ...state,
-        user: arr,
+        book: arr,
       };
     case "DELETE_BOOK":
       const indexx = arr.findIndex((book) => book._id === action.payload.id);
       arr[indexx] = { ...action.payload };
-      let array = [...state.user];
+      let array = [...state.book];
       console.log(array);
       return {
         ...state,
-        user: arr,
+        book: arr,
       };
     // const index = state.user.map(item=>item._id===action.payload.id)
     default:

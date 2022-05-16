@@ -82,7 +82,7 @@ import Nestable from "./Components/Nestable";
 
 // userlists
 
-import userlists from "./Userlists/userlists";
+// import userlists from "./Userlists/userlists";
 import Category from "./Category/category";
 import BookForm from "./Book/BookForm";
 import Chapter from "./Chapter/Chapter";
@@ -199,13 +199,13 @@ const Routes = [
     pageTitle: "Page Gallery",
     component: PagePricing,
   },
-  {
-      path: "/userlists",
-      name: 'Userlists',
-      exact: true,
-      pageTitle: "Userlists",
-      component: userlists
-  },
+  // {
+  //     path: "/userlists",
+  //     name: 'Userlists',
+  //     exact: true,
+  //     pageTitle: "Userlists",
+  //     component: userlists
+  // },
   {
       path: "/categories",
       name: 'Categories',

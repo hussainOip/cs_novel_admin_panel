@@ -22,22 +22,14 @@ const BookPreview = ({
   const history = useHistory();
   const id = params;
 
-  // console.log(params," SEASON PARAMS");
-
-console.log(id.id);
-  // console.log(seasonReducer?.user);
-
-  const token = userReducer.accessToken
-// console.log(token);
+  const token = userReducer.accessToken;
 
   useEffect(() => {
-    getSeasons(id.id,token);
+    getSeasons(id.id, token);
   }, []);
 
-  // console.log(id?.id + " BOOK ID");
-
   const afterCreate = () => {
-    getSeasons(id.id);
+    getSeasons(id.id, token);
   };
   const onSubmit = () => {
     let createData = {
@@ -45,15 +37,15 @@ console.log(id.id);
       book: id.id,
       season: season,
     };
-    createSeasons(createData,token).then(afterCreate);
+    createSeasons(createData, token).then(afterCreate);
   };
 
   const afterDelete = () => {
-    getSeasons(id.id);
+    getSeasons(id.id, token);
   };
 
   const deleteItem = (id) => {
-    deleteSeason(id,token).then(afterDelete());
+    deleteSeason(id, token).then(afterDelete());
   };
 
   const editItem = (item) => {
@@ -64,7 +56,7 @@ console.log(id.id);
   };
 
   const onSuccess = () => {
-    getSeasons();
+    getSeasons(id.id, token);
   };
 
   const updateSeasonData = () => {
@@ -73,7 +65,7 @@ console.log(id.id);
     const editSeasonData = {
       name: name,
     };
-    updateSeason(seasonId, editSeasonData,token).then(onSuccess);
+    updateSeason(seasonId, editSeasonData, token).then(onSuccess);
   };
 
   return (
@@ -135,7 +127,7 @@ console.log(id.id);
             <th scope="col">Delete</th>
           </tr>
         </thead>
-        {!seasonReducer?.user.length ? (
+        {!seasonReducer?.season.length ? (
           <thead>
             <tr>
               <th scope="row">Data Not Recorded</th>
@@ -145,8 +137,7 @@ console.log(id.id);
             </tr>
           </thead>
         ) : (
-          seasonReducer?.user.map((item, index) => {
-            console.log(item)
+          seasonReducer?.season.map((item, index) => {
             return (
               <tbody key={index}>
                 <tr>
@@ -186,6 +177,6 @@ console.log(id.id);
 };
 
 const mapStateToProps = ({ seasonReducer, userReducer }) => {
-  return { seasonReducer , userReducer};
+  return { seasonReducer, userReducer };
 };
 export default connect(mapStateToProps, actions)(BookPreview);

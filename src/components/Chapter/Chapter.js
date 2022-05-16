@@ -68,7 +68,7 @@ const afterCreate=()=>{
     updateChapter(editData,token)
     setName("")
   }
-
+console.log();
   return (
     <>
       <div className="row">
@@ -115,7 +115,7 @@ const afterCreate=()=>{
             <th scope="col">Delete</th>
           </tr>
         </thead>
-        {!chapterReducer?.user?.length ? (
+        {!chapterReducer?.chapters?.length ? (
           <thead>
             <tr>
               <th scope="row">Data Not Recorded</th>
@@ -126,7 +126,7 @@ const afterCreate=()=>{
             </tr>
           </thead>
         ) : (
-          chapterReducer?.user.map((item, index) => {
+          chapterReducer?.chapters.map((item, index) => {
             {
               {/* console.log(item) */}
             }

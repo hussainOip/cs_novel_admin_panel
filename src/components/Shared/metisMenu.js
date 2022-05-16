@@ -99,12 +99,12 @@ const metisMenu = [
   //   label: "Dashboard",
   //   to: "/dashboard12",
   // },
-  {
-    id: 1001,
-    icon: "icon-list",
-    label: "Userlists",
-    to: "/userlists",
-  },
+  // {
+  //   id: 1001,
+  //   icon: "icon-list",
+  //   label: "Userlists",
+  //   to: "/userlists",
+  // },
   {
     id: 1002,
     icon: "icon-grid",

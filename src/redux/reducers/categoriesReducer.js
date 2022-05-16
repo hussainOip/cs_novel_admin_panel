@@ -1,5 +1,5 @@
 const api_state = {
-	user : []
+	categories : []
 }
 
 const categoriesReducer = (state = api_state, action) => {
@@ -9,7 +9,8 @@ const categoriesReducer = (state = api_state, action) => {
 	switch (action.type) {
 		case 'GET_CATEGORIES': 
 		return {
-			user : [...action.payload]
+			...state,
+			categories : [...action.payload]
 		}
 	
 		default: return state

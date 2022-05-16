@@ -4,9 +4,9 @@ const CustomModal = ( props ) => {
   // console.log(props)
   return (
     <>
-      <div className={`modal fade d-block show`} id="exampleModal">
+      <div className={`modal fade d-block show`} id="exampleModal" >
         <div className={`modal-dialog modal-dialog-centered modal-${props.size} `} role="document">
-          <div className="modal-content">
+          <div className="modal-content book_modal">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
                 {props.title}
@@ -36,9 +36,11 @@ const CustomModal = ( props ) => {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-round btn-primary" onClick={() => props.onSaveButton() } disabled={props.isDisabled || false } >
+              {props?.updation ? 
+               (<button type="button" className="btn btn-round btn-primary" onClick={() => props.onSaveButton() } disabled={props.isDisabled || false } >
                 Save changes
-              </button>
+              </button> ):null
+            }
             </div>
           </div>
         </div>

@@ -1,14 +1,17 @@
 const api_state = {
-  user: [],
+  accessToken: "",
+  userData: null,
+  userlist: [],
+  userCount:""
 };
 
 const userReducer = (state = api_state, action) => {
-  // console.log(action.payload, '=========reducer')
-
   switch (action.type) {
     case "GET_USERLISTS":
       return {
-        user: [...action.payload],
+        ...state,
+        userlist: [ ...action.payload.data],
+        userCount: action.payload.totalData
       };
     case "USER_LOGIN":
       return {
@@ -16,6 +19,7 @@ const userReducer = (state = api_state, action) => {
         userData: action.payload,
         accessToken: action.payload.token,
       };
+
     default:
       return state;
   }

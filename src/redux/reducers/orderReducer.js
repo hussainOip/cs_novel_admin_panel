@@ -1,18 +1,19 @@
-const INITIAL_STATE={
-    data:[]
-}
-const orderReducer=(state=INITIAL_STATE,action)=>{
-    // console.log(action.payload);
-    switch(action.type){
-        case "GET_ORDER_LIST":
-          // let arr = [...state.user];
-          // const index= arr.findIndex((orders)=>orders._id===action.payload)
-          // console.log(index);
+const INITIAL_STATE = {
+  order: [],
+  orderCount: "",
+};
+const orderReducer = (state = INITIAL_STATE, action) => {
+  // console.log(action.payload);
+  switch (action.type) {
+    case "GET_ORDER_LIST":
+      console.log(action.payload)
       return {
-        user: [...action.payload],
+        ...state,
+        order: [...action.payload.data],
+        orderCount: action.payload.totalData,
       };
-            default: 
-            return state
-    }
-}
-export default orderReducer
+    default:
+      return state;
+  }
+};
+export default orderReducer;

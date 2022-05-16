@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
+import { connect } from "react-redux";
 
-const UsersList = () => {
+import * as actions from "../../redux/actions/userAction";
+import CustomModal from "../Atomics/CustomModal";
+
+const UsersList = ({ get_userlists, blockUnblockUser, userReducer }) => {
   let accounts = [
     { type_name: "Free", type_id: 1 },
     { type_name: "Bronze", type_id: 2 },
@@ -8,18 +13,35 @@ const UsersList = () => {
     { type_name: "Silver", type_id: 4 },
     { type_name: "Gold", type_id: 5 },
   ];
-  let users = [
-    { id: 1, name: "TestUser", email: "test@gmail.com", accoun_type: 1 },
-    { id: 2, name: "TestUser1", email: "test@gmail.com", accoun_type: 2 },
-    { id: 3, name: "TestUser2", email: "test@gmail.com", accoun_type: 3 },
-    { id: 4, name: "TestUser3", email: "test@gmail.com", accoun_type: 4 },
-    { id: 5, name: "TestUser4", email: "test@gmail.com", accoun_type: 5 },
-    { id: 6, name: "TestUser6", email: "test@gmail.com", accoun_type: 1 },
-    { id: 7, name: "TestUser17", email: "test@gmail.com", accoun_type: 2 },
-    { id: 8, name: "TestUser8", email: "test@gmail.com", accoun_type: 3 },
-    { id: 9, name: "TestUser99", email: "test@gmail.com", accoun_type: 4 },
-    { id: 10, name: "TestUser34", email: "test@gmail.com", accoun_type: 5 },
-  ];
+  const [rowIndex, setRowIndex] = useState();
+  const [isEditCatModal, setIsEditCatModal] = useState(false);
+  const [page, setpage] = useState(1);
+  const token = userReducer.accessToken;
+  const value = parseInt(userReducer.userCount / 25);
+  var pageCount;
+
+  const showModal = (index) => {
+    setIsEditCatModal(true);
+    setRowIndex(index);
+  };
+
+  if (userReducer.userCount == value * 25) {
+    pageCount = value;
+  } else {
+    pageCount = parseInt(userReducer.userCount / 25) + 1;
+  }
+
+  useEffect(() => {
+    get_userlists(token, 1);
+  }, []);
+  useEffect(() => {
+    get_userlists(token, page);
+  }, [page]);
+  const handlePageClick = (e) => {
+    const selectedPage = e.selected;
+    setpage(selectedPage + 1);
+  };
+
   return (
     <>
       <div className="container-fluid">
@@ -38,7 +60,7 @@ const UsersList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((item, i) => {
+                  {userReducer?.userlist?.map((item, i) => {
                     return (
                       <tr>
                         <th className="w60">{i + 1}</th>
@@ -68,17 +90,17 @@ const UsersList = () => {
                         </td>
                         <td className="text-center">
                           <button
-                            onClick={() => console.log(item.id)}
-                            className="btn btn-small btn-success"
+                            className="btn btn-primary"
+                            onClick={() => showModal(i)}
                           >
-                            Edit
+                            Show
                           </button>
-                          <button
+                          {/* <button
                             onClick={() => console.log(item.id)}
                             className="btn btn-small btn-danger ml-2"
                           >
                             Remove
-                          </button>
+                          </button> */}
                         </td>
                       </tr>
                     );
@@ -179,13 +201,93 @@ const UsersList = () => {
                     </td>
                   </tr> */}
                 </tbody>
+                <tfoot>
+                  <ReactPaginate
+                    previousLabel={"prev"}
+                    nextLabel={"next"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageClick}
+                    containerClassName={"pagination"}
+                    subContainerClassName={"pages pagination"}
+                    activeClassName={"active"}
+                  />
+                </tfoot>
               </table>
             </div>
           </div>
         </div>
       </div>
+      {isEditCatModal && (
+        <CustomModal
+          size="xl"
+          _oncloseModal={() => {
+            setIsEditCatModal(false);
+          }}
+          updation={false}
+        >
+          {/* {console.log(rowIndex, 'index')}
+          {console.log(userReducer?.userlist?.[rowIndex])} */}
+          <h1 className="mb-5">Details</h1>
+          <div className="form-row">
+            <div className="col-md-4 mb-3">
+              <label htmlFor="validationCustom01">First Name</label>
+              <li className="list-group-item">
+                {userReducer?.userlist?.[rowIndex]?.firstNname}
+              </li>
+            </div>
+            <div className="col-md-4 mb-3">
+              <label htmlFor="validationCustom02">Last Name</label>
+              <li className="list-group-item">
+                {userReducer?.userlist?.[rowIndex].lastName}
+              </li>
+            </div>
+            <div className="col-md-4 mb-3">
+              <label htmlFor="validationCustom02">Email</label>
+              <li className="list-group-item">
+                {userReducer?.userlist?.[rowIndex].email}
+              </li>
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="col-md-4 mb-3">
+              <label htmlFor="validationCustom01">Role</label>
+              <li className="list-group-item">
+                {userReducer?.userlist?.[rowIndex].role.name}
+              </li>
+            </div>
+            <div className="col-md-4 mb-3">
+              <label htmlFor="validationCustom02">Profile Image</label>
+              <img src={userReducer?.userlist?.[rowIndex].profile_img} />
+            </div>
+            <div className="col-md-4 mb-3">
+              <label htmlFor="validationCustom02">Subscription</label>
+              <li className="list-group-item">
+                {userReducer?.userlist?.[rowIndex].subscription}
+              </li>
+            </div>
+          </div>
+
+          {/* <div className="form-row">
+              <div className="col-md-4 mb-3">
+                <label htmlFor="validationCustom01">User name</label>
+                <li className="list-group-item">{userReducer?.userlist?.[rowIndex].user?.username}</li>
+              </div>
+            </div> */}
+        </CustomModal>
+      )}
     </>
   );
 };
 
-export default UsersList;
+function mapStateToProps({ userReducer }) {
+  return {
+    userReducer,
+  };
+}
+
+export default connect(mapStateToProps, actions)(UsersList);

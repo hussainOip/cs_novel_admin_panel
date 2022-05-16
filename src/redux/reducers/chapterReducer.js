@@ -1,17 +1,19 @@
 const INITIAL_STATE={
-    data:[]
+  chapters:[]
 }
 const chapterReducer=(state=INITIAL_STATE,action)=>{
     switch(action.type){
         case "GET_ALL_CHAPTERS":
       return {
-        user: [...action.payload],
+        ...state,
+
+        chapters: [...action.payload],
       }
       case "CHAPTER_UPDATED":
       let arr = [...state.user];
       return {
         ...state,
-        user: arr,
+        updatedChapter: arr,
       };
             default: 
             return state

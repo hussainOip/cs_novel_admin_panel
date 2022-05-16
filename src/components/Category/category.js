@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../redux/actions/categoryAction";
+import userReducer from "../../redux/reducers/userReducer";
 import CustomModal from "../Atomics/CustomModal";
 import CustomToggle from "../Atomics/CustomToggle";
 
@@ -9,7 +10,8 @@ const Category = ({
   categoriesReducer,
   update_categories,
   unable_disable_category,
-  add_category
+  add_category,
+  userReducer
 }) => {
   const [isEditCatModal, setIsEditCatModal] = useState(false);
   const [isCreateCat, setIsCreateCat] = useState(false);
@@ -17,20 +19,21 @@ const Category = ({
     id: "",
     cat_name: "",
   });
-
+const accessToken = userReducer.accessToken 
   useEffect(() => {
-    get_categories();
+    get_categories(accessToken);
   }, []);
-
+console.log(isCreateCat);
   function changeCategoriesData(id) {
-    update_categories(modalInputValue).then(() => {
+    console.log(modalInputValue)
+    update_categories(modalInputValue,accessToken).then(() => {
       setIsEditCatModal(false);
       setModalInputValue({
-        id: "",
+        id:"",
         cat_name: "",
       });
       setIsCreateCat(false)
-      get_categories();
+      get_categories(accessToken);
     });
   }
 
@@ -60,7 +63,7 @@ const Category = ({
               </tr>
             </thead>
             <tbody>
-              {categoriesReducer.user.map((item, index) => {
+              {categoriesReducer?.categories?.map((item, index) => {
                 {/* console.log(item, "=====map====="); */}
                 return (
                   <tr key={index}>
@@ -70,8 +73,8 @@ const Category = ({
                         <CustomToggle
                           isStatusTrue={item?.status}
                           unable_disable={() =>
-                            unable_disable_category(item?._id).then(() => {
-                              get_categories();
+                            unable_disable_category(item?._id,accessToken).then(() => {
+                              get_categories(accessToken);
                             })
                           }
                         />
@@ -106,13 +109,15 @@ const Category = ({
             setModalInputValue({ id: "", cat_name: "" });
           }}
           isDisabled={modalInputValue.cat_name.length === 0}
-          onSaveButton={() => {isCreateCat ? add_category(modalInputValue.cat_name).then(()=>{
+          onSaveButton={() => {isCreateCat ? add_category(modalInputValue.cat_name,accessToken).then(()=>{
             setModalInputValue({ id: "", cat_name: "" })
             setIsEditCatModal(false)
             setIsCreateCat(false)
-            get_categories()
+            get_categories(accessToken)
           }) :changeCategoriesData(modalInputValue.id)}}
+          updation={true}
         >
+          <label>Category</label>
           <input
             type="text"
             value={modalInputValue.cat_name}
@@ -129,9 +134,9 @@ const Category = ({
   );
 };
 
-function mapStateToProps({ categoriesReducer }) {
+function mapStateToProps({ categoriesReducer ,userReducer}) {
   return {
-    categoriesReducer,
+    categoriesReducer,userReducer
   };
 }
 

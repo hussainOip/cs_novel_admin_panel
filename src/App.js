@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect, Provider } from "react-redux";
 import "./App.css";
 import Layout from "./components/Shared/Layout";
 import Login from "./components/Authentication/login";
@@ -10,6 +10,9 @@ import Maintenance from "./components/Authentication/maintenance";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import userReducer from "./redux/reducers/userReducer";
+import { persistor, store } from "./redux/reducers/rootReducer";
+import { PersistGate } from "redux-persist/integration/react";
 
 class App extends Component {
   render() {
@@ -37,20 +40,23 @@ class App extends Component {
             this.leftSidebar = leftSidebar;
           }}
         >
-          <Router>
-            <Switch>
-              {/* <Route path="/signup" component={SignUp} /> */}
-              <Route path="/login" component={Login} />
-              {/* <Route path="/forgotpassword" component={ForgotPassword} /> */}
-              <Route path="/notfound" component={NotFound} />
-              {/* <Route path="/maintenance" component={Maintenance} /> */}
-              <Route component={Layout} />
-            </Switch>
-          </Router>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <Router>
+                <Switch>
+                  {/* <Route path="/signup" component={SignUp} /> */}
+
+                  <Route path="/login" component={Login} />
+                  {/* <Route path="/forgotpassword" component={ForgotPassword} /> */}
+                  <Route path="/notfound" component={NotFound} />
+                  {/* <Route path="/maintenance" component={Maintenance} /> */}
+                  <Route component={Layout} />
+                </Switch>
+              </Router>
+            </PersistGate>
+          </Provider>
         </div>
-        <ToastContainer
-          position="top-center"
-        />
+        <ToastContainer position="top-center" />
       </>
     );
   }
@@ -70,6 +76,5 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
 
 // export default App

@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useReducer, useState } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import * as actions from "../../redux/actions/bookActions";
+import { changePassword } from '../../redux/actions/userAction';
 
-const PageProfile = () => {
+
+const PageProfile = ({userReducer}) => {
+
+    const [oldPassowrd,setoldPassowrd] = useState("")
+    const [newPassword,setnewPassword] = useState("")
+
+    const [confirmPassword,setconfirmPassword] = useState("")
+    const updatePass=()=>{
+        changePassword(userReducer.accessToken,oldPassowrd,newPassword,confirmPassword)
+        resetpass()
+    }
+    const resetpass = ()=>{
+        console.log("Muni");
+        setoldPassowrd("")
+        setnewPassword("")
+        setconfirmPassword("")
+    }
+
     return (
         <>
             <div className="container-fluid">
@@ -17,23 +37,23 @@ const PageProfile = () => {
                                 </ol>
                             </nav>
                         </div>
-                        <div className="col-md-6 col-sm-12 text-right hidden-xs">
+                        {/* <div className="col-md-6 col-sm-12 text-right hidden-xs">
                             <a href="/" className="btn btn-sm btn-primary btn-round" title="">Add New</a>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="row clearfix">
-                    <div className="col-md-12">
+                    {/* <div className="col-md-12">
                         <div className="card social">
                             <div className="profile-header d-flex justify-content-between justify-content-center">
                                 <div className="d-flex">
                                     <div className="mr-3">
-                                        <img src="../assets/images/user.png" className="rounded" alt="Avatar" />
+                                        <img src={userReducer?.userData?.profile_img} className="rounded" alt="Avatar" />
                                     </div>
                                     <div className="details">
-                                        <h5 className="mb-0">Louis Pierce</h5>
-                                        <span className="text-light">Ui UX Designer</span>
-                                        <p className="mb-0"><span>Posts: <strong>321</strong></span> <span>Followers: <strong>4,230</strong></span> <span>Following: <strong>560</strong></span></p>
+                                        <h5 className="mb-0">{userReducer?.userData?.username}</h5>
+                                        <span className="text-light">{userReducer.userData?.role?.description}</span>
+                                       
                                     </div>
                                 </div>
                                 <div>
@@ -42,7 +62,7 @@ const PageProfile = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className="col-xl-4 col-lg-4 col-md-5">
                         <div className="card">
@@ -57,7 +77,7 @@ const PageProfile = () => {
                                 </div> */}
                                 <hr />
                                 <small className="text-muted">Email address: </small>
-                                <p>louispierce@example.com</p>
+                                <p>{userReducer.userData?.email}</p>
                                 <hr />
                                 <small className="text-muted">Mobile: </small>
                                 <p>+ 202-222-2121</p>
@@ -75,7 +95,7 @@ const PageProfile = () => {
                     </div>
 
                     <div className="col-xl-8 col-lg-8 col-md-7">
-                        <div className="card">
+                        {/* <div className="card">
                             <div className="header">
                                 <h2>Basic Information</h2>
                             </div>
@@ -435,44 +455,46 @@ const PageProfile = () => {
                                 <button type="button" className="btn btn-round btn-primary mr-1">Update</button> &nbsp;&nbsp;
                             <button type="button" className="btn btn-round btn-default">Cancel</button>
                             </div>
-                        </div>
+                        </div> */}
+
                         <div className="card">
                             <div className="header">
                                 <h2>Account Data</h2>
                             </div>
                             <div className="body">
                                 <div className="row clearfix">
-                                    <div className="col-lg-4 col-md-12">
+                                    {/* <div className="col-lg-4 col-md-12">
                                         <div className="form-group">
-                                            <input type="text" className="form-control" value="louispierce" disabled placeholder="Username" />
+                                            <input type="text" className="form-control" value={userReducer?.userData?.username} disabled placeholder="Username" />
                                         </div>
                                     </div>
                                     <div className="col-lg-4 col-md-12">
                                         <div className="form-group">
-                                            <input type="email" className="form-control" value="louis.info@yourdomain.com" placeholder="Email" />
+                                            <input type="email" className="form-control" value={userReducer?.userData?.email} disabled placeholder="Email" />
                                         </div>
                                     </div>
                                     <div className="col-lg-4 col-md-12">
-                                        <div className="form-group">
-                                            <input type="text" className="form-control" placeholder="Phone Number" />
-                                        </div>
-                                    </div>
+                                        {/* <div className="form-group"> */}
+                                            {/* <input type="text" className="form-control" placeholder="Phone Number" value=""  /> */}
+                                            
+                                        {/* </div> */}
+                                    {/* </div>  */}
                                     <div className="col-lg-12 col-md-12">
                                         <hr />
                                         <h6>Change Password</h6>
                                         <div className="form-group">
-                                            <input type="password" className="form-control" placeholder="Current Password" />
+                                            <input type="password" className="form-control" placeholder="Current Password" value={oldPassowrd} onChange={(e)=>setoldPassowrd(e.target.value)} />
                                         </div>
                                         <div className="form-group">
-                                            <input type="password" className="form-control" placeholder="New Password" />
+                                            <input type="password" className="form-control" placeholder="New Password" value={newPassword} onChange={(e)=>setnewPassword(e.target.value)} />
                                         </div>
                                         <div className="form-group">
-                                            <input type="password" className="form-control" placeholder="Confirm New Password" />
+                                            <input type="password" className="form-control" placeholder="Confirm New Password"  value={confirmPassword} onChange={(e)=>setconfirmPassword(e.target.value)}/>
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" className="btn btn-round btn-primary mr-1">Update</button> &nbsp;&nbsp;
-                            <button type="button" className="btn btn-round btn-default">Cancel</button>
+                                <button type="button" className="btn btn-round btn-primary mr-1" onClick={()=>updatePass()}>Update</button> &nbsp;&nbsp;
+                            <button type="button" className="btn btn-round btn-default" onClick={()=>{resetpass()}}>Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -482,4 +504,9 @@ const PageProfile = () => {
     );
 
 }
-export default PageProfile
+
+
+const mapStateToProps = ({  userReducer }) => {
+    return { userReducer };
+  };
+  export default connect(mapStateToProps, actions)(PageProfile);

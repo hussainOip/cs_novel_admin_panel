@@ -1,10 +1,11 @@
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { base_url } from "../../config/config.json";
 
 
 
-const base_url = "http://192.168.0.38:8002/api";
+
 
 
 export const updateChapter = (data,token) => async (dispatch) => {
@@ -61,7 +62,7 @@ export const getAllPara = (id,token) => async (dispatch) => {
   }
 };
 
-export const getOrderList = (token) => async (dispatch) => {
+export const getOrderList = (token,page) => async (dispatch) => {
   try {
     const header = {
       headers: {
@@ -69,11 +70,13 @@ export const getOrderList = (token) => async (dispatch) => {
         Accept: "application/json",
       },
     };
-    const response = await axios.get(`${base_url}/admin/subscription/gets`,header);
+    console.log("============");
+    const response = await axios.get(`${base_url}/admin/subscription/gets?page=${page}`,header);
+    console.log(response);
     if (response.data.success) {
       dispatch({
         type: "GET_ORDER_LIST",
-        payload: response.data.data,
+        payload: response.data,
       });
     } else {
       toast.warn(response.data.msg, {

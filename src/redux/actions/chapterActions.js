@@ -1,6 +1,8 @@
 import { toast } from "react-toastify";
 import axios from "axios";
-const base_url = "http://192.168.0.38:8002/api";
+
+import { base_url } from "../../config/config.json";
+
 
 export const createBook=(body)=> async  (dispatch)=>{
     console.log(body)
